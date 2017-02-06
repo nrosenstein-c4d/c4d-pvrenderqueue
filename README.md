@@ -11,17 +11,6 @@ or Team Render.
 - [Python API Documentation](http://niklasrosenstein.github.io/c4d-pvrenderqueue/api.html)
 - [Original Download Page](https://www.niklasrosenstein.com/2015/08/pv-render-queue-2)
 
-## Scripts
-
-Three scripts that help you set-up the render queue are included.
-
-- object_passes
-- queue_current_project
-- takes
-
-> **Note**: Due to a Cinema 4D bug introduced in R17.053 which is only fixed
-> in R18.039 and newer, the *"takes"* script does not function!
-
 ## License
 
 ```

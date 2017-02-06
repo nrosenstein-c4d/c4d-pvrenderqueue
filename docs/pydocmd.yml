@@ -1,0 +1,26 @@
+site_name: PV Render Queue
+docs_dir: source
+theme: bootstrap
+
+additional_search_paths:
+- ../devel/nr.pvrq2
+- c4d-fake
+
+markdown_extras:
+- admonition
+- smarty
+
+generate:
+- api/index.md:
+  - nr.pvrq2+
+- api/utils.md:
+  - nr.pvrq2.gui+
+  - nr.pvrq2.node+
+  - nr.pvrq2.ordereddict+
+
+pages:
+- Home: index.md
+- Changelog: changelog.md
+- API:
+  - PV Render Queue: api/index.md
+  - Utils: api/utils.md

@@ -14,30 +14,28 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
-This document describes the :mod:`nr.pvrq2` module. It exposes a
-rich API to develop extensions that is used internally by the
-*PV Render Queue 2* plugin as well.
+This document describes the #nr.pvrq2 module. It exposes a rich API to develop
+extensions that is used internally by the *PV Render Queue 2* plugin as well.
 
-Example
--------
+# Example
 
-This is a stripped down version of the ``queue_current_project.py``
-script that is delivered with the plugin. It simply takes the full
-path to the document and creates a new :class:`FileRenderJob` from
-it, appending as the last job in the render queue.
+This is a stripped down version of the `queue_current_project.py` script
+that is delivered with the plugin. It simply takes the full path to the
+document and creates a new :class:`FileRenderJob` from it, appending as the
+last job in the render queue.
 
-.. code:: python
+```python
+import c4d, os
+import nr.pvrq2
 
-  import c4d, os
-  import nr.pvrq2
+def main():
+  filename = os.path.join(doc.GetDocumentPath(), doc.GetDocumentName())
+  job = nr.pvrq2.FileRenderJob(filename)
+  nr.pvrq2.root.append(job)
+  c4d.EventAdd()
 
-  def main():
-    filename = os.path.join(doc.GetDocumentPath(), doc.GetDocumentName())
-    job = nr.pvrq2.FileRenderJob(filename)
-    nr.pvrq2.root.append(job)
-    c4d.EventAdd()
-
-  main()
+main()
+```
 """
 
 from .gui import JobDetailsDialog
@@ -73,39 +71,37 @@ HYPERFILE_IDENT = 1037405
 
 class BaseNode(TreeNodeBase):
   '''
-  Base class for nodes in the render queue. Provides properties
-  such as an elements enabled and selection state. Instances
-  of this class can be serialized to and from :class:`c4d.HyperFile`
-  objects but their constructor **must** be callable with no
-  arguments for that to work.
+  Base class for nodes in the render queue. Provides properties such as an
+  elements enabled and selection state. Instances of this class can be
+  serialized to and from #c4d.HyperFile objects but their constructor **must**
+  be callable with no arguments for that to work.
 
-  .. attribute:: enabled
+  # Attributes
 
-    A :class:`bool` flag that is used to determine if the node is
-    enabled. In the case of a :class:`RenderJob`, this member determines
-    if the job should be rendered or skipped.
+  enabled (bool): A #bool flag that is used to determine if the node is
+    enabled. In the case of a #RenderJob, this member determines if the job
+    should be rendered or skipped.
 
-  .. attribute:: selected
-
-    A :class:`bool` flag that specifies whether the node is selected
+  selected (bool): A #bool flag that specifies whether the node is selected
     in the GUI or not. This member is not saved during serialization.
 
-  .. attribute:: uuid
+  uuid (uuid.UUID): The UUID of the node. This is used to keep track of
+    parent-child relationships during the serialization process with #read()
+    and #write().
 
-    The :class:`uuid.UUID` of the node. This is used to keep track
-    of parent-child relationships during the serialization process
-    with :meth:`read` and :meth:`write`.
+  # Class Members
+
+  disklevel (int): Override on class-level. The disklevel for serialization.
+
+  ident (str): Override on class-level. The identifier for finding the right
+    class to read back the node when loading a HyperFile.
+
+  serializable (bool): Override on class-level. True if the implementation is
+    serializable, #False if #read() and #write() raise #NotImplementedError.
   '''
 
-  # Override on class-level. The disklevel for serialization.
   disklevel = 0
-
-  # Override on class-level. The identifier for finding the right
-  # class to read back the node when loading a HyperFile.
   ident = None
-
-  # Override on class-level. True if the implementation is serializable,
-  # False if :meth:`read` and :meth:`write` raise :class:`NotImplementedError`.
   serializable = False
 
   def __init__(self):
@@ -156,7 +152,8 @@ class BaseNode(TreeNodeBase):
     Returns the enabled state of the node, based on its own state and
     the state of its parent nodes.
 
-    :returns: ``'enabled'``, ``'disabled'`` or ``'tristate'``
+    # Returns
+    One of `'enabled'`, `'disabled'` or `'tristate'`.
     '''
 
     if not self.enabled:
@@ -180,8 +177,11 @@ class BaseNode(TreeNodeBase):
     '''
     Overridable. Write the node to a HyperFile.
 
-    :param hf: A :class:`c4d.HyperFile` object.
-    :return: True if the job was written successfully, False if not.
+    # Parameters
+    hf (c4d.storage.HyperFile): The HyperFile to write to.
+
+    # Returns
+    #True if the job was written successfully, #False if not.
     '''
 
     if not hf.WriteBool(self.enabled): return False
@@ -191,12 +191,17 @@ class BaseNode(TreeNodeBase):
     '''
     Overridable. Read a node from a HyperFile.
 
-    :param hf: A :class:`HyperFile` object.
-    :param disklevel: The disklevel of the data that was written
-      to the HyperFile, as it was specified to :func:`register_node_plugin`.
-    :raise NotImplementedError: Default implementation. Should be
-      raised if :meth:`serializable` would return False.
-    :return: The :class:`BaseNode` object or None if it could not be read.
+    # Parameters
+    hf (c4d.storage.HyperFile): The HyperFile to read from.
+    disklevel (int): The disklevel of the data that was written to the
+      HyperFile, as it was specified to #register_node_plugin().
+
+    # Raises
+    NotImplementedError: Default implementation. Should be raised if
+      #serializable() is #False.
+
+    # Returns
+    The #BaseNode object or None if it could not be read.
     '''
 
     enabled = hf.ReadBool()
@@ -214,35 +219,30 @@ class RenderJob(BaseNode):
 
   A RenderJob is not expected to have child nodes.
 
-  Known subclasses: :class:`FileRenderJob`
+  Known subclasses: #FileRenderJob
 
-  .. attribute:: render_tr
+  # Attributes
 
-    A :class:`bool` flag that specifies whether the job should
-    be rendered with Team Render or using the standard Render to
-    Picture Viewer command.
+  render_tr (bool): A #bool flag that specifies whether the job should be
+    rendered with Team Render or using the standard Render to Picture Viewer
+    command.
 
-  .. attribute:: status
+  status (str): The status of the job. Any of the following values:
 
-    The status of the job. Any of the following values:
+      * #nr.pvrq2.STATUS_PENDING
+      * #nr.pvrq2.STATUS_RENDERING
+      * #nr.pvrq2.STATUS_COMPLETED
+      * #nr.pvrq2.STATUS_FAILED
+      * #nr.pvrq2.STATUS_CANCELLED
 
-      * :data:`nr.pvrq2.STATUS_PENDING`
-      * :data:`nr.pvrq2.STATUS_RENDERING`
-      * :data:`nr.pvrq2.STATUS_COMPLETED`
-      * :data:`nr.pvrq2.STATUS_FAILED`
-      * :data:`nr.pvrq2.STATUS_CANCELLED`
+  error_message (str): #None or a #str if there was an error with the job.
 
-  .. attribute:: error_message
+  # Class Members
 
-    :const:`None` or a :class:`str` if there was an error with the job.
-
-  .. attribute:: resettable
-
-    Class-level attribute that specifies if the job is resettable
-    using :meth:`reset`.
+  resettable (bool): Class-level attribute that specifies if the job is
+    resettable using #reset().
   '''
 
-  # Override on class-level. True if the job can :meth:`reset`.
   resettable = False
 
   def __init__(self):
@@ -274,8 +274,8 @@ class RenderJob(BaseNode):
   def show_job_details(self):
     '''
     Called to open a dialog with information on the job. The default
-    implementation will use the dictionary returned by
-    :meth:`get_job_details` and display it in a dialog.
+    implementation will use the dictionary returned by #get_job_details()
+    and display it in a dialog.
     '''
 
     details = self.get_job_details()
@@ -287,7 +287,7 @@ class RenderJob(BaseNode):
     '''
     Called to retrieve the Cinema 4d BaseDocument that should be
     rendered in the Picture Viewer. Returns None if the scene could not
-    be loaded. The job's status will be set to :data:`STATUS_FAILED`.
+    be loaded. The job's status will be set to #STATUS_FAILED.
     '''
 
     raise NotImplementedError
@@ -335,7 +335,7 @@ class RenderJob(BaseNode):
     '''
     Reset the status of the job, allowing it to be processed
     by the render queue once again. This method should only be
-    called if :attr:`resettable` is True.
+    called if #resettable is True.
     '''
 
     self.status = STATUS_PENDING
@@ -347,12 +347,12 @@ class Folder(BaseNode):
   Represents a folder that can contain a number of render jobs. All
   children of a folder are supposed to be :class:`RenderJob` objects.
 
-  .. code:: python
-
-    folder = nr.pvrq2.Folder('John Doe\'s stuff')
-    folder.append(job1)
-    folder.append(job2)
-    nr.pvrq2.root.append(folder)
+  ```python
+  folder = nr.pvrq2.Folder('John Doe\'s stuff')
+  folder.append(job1)
+  folder.append(job2)
+  nr.pvrq2.root.append(folder)
+  ```
   '''
 
   def __init__(self, name='???'):
@@ -444,7 +444,7 @@ def write_nodes(root, hf):
   Writes all nodes of *root* into the HyperFile *hf*.
 
   Note that this function can raise any exception that any
-  of the :class:`BaseNode.write` implementations could raise.
+  of the #BaseNode.write() implementations could raise.
   '''
 
   if root.serializable:
@@ -474,15 +474,18 @@ def read_nodes(hf, error_callback=None):
   Reads all nodes back from the HyperFile *hf* and returns all
   root nodes in a list.
 
-  :param hf: A :class:`HyperFile` object.
-  :param error_callback: Called when an error occurs with an
+  # Parameters
+
+  hf (c4d.storage.HyperFile): The HyperFile to read from.
+  error_callback (function): Called when an error occurs with an
     error type string and a data value. Possible type strings are:
 
-    * ``'unknown-plugin'`` with the identifier as its data
-    * ``'read-exception'`` with the Python exception as its data
-    * ''`read-wrong-result'`` with the wrong object returned
+    * `'unknown-plugin'` with the identifier as its data
+    * `'read-exception'` with the Python exception as its data
+    * `'read-wrong-result'` with the wrong object returned
 
-  :return: :class:`list` of :class:`BaseNode`
+  # Returns
+  #list of #BaseNode.
   '''
 
   nodes = OrderedDict()
