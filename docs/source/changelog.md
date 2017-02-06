@@ -1,5 +1,9 @@
 # Changelog
 
+## v2.4 (unreleased)
+
+* Open Source!
+
 ## v2.3
 
 * Fix issue with pre-R17 versions of Cinema 4D embedding Python 2.6
