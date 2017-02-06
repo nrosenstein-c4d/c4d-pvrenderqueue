@@ -5,10 +5,11 @@ jobs and render them directly in the Picture Viewer using the external
 or Team Render.
 
 - [niklasrosenstein.com](https://niklasrosenstein.com)
-- [Download PV RenderQueue 2](https://niklasrosenstein.com/2015/08/pv-render-queue-2)
-- [Feedback & Bug Reports](https://niklasrosenstein.com/2015/08/pv-render-queue-2#reply-title)
-- [Documentation](http://docs.niklasrosenstein.com/pvrenderqueue)
-- [Python API Documentation](http://docs.niklasrosenstein.com/pvrenderqueue/api.html)
+- [Download PV RenderQueue 2](https://github.com/NiklasRosenstein/c4d-pvrenderqueue/releases)
+- [Feedback & Bug Reports](https://github.com/NiklasRosenstein/c4d-pvrenderqueue/issues)
+- [Documentation](http://niklasrosenstein.github.io/c4d-pvrenderqueue)
+- [Python API Documentation](http://niklasrosenstein.github.io/c4d-pvrenderqueue/api.html)
+- [Original Download Page](https://www.niklasrosenstein.com/2015/08/pv-render-queue-2)
 
 ## Scripts
 
