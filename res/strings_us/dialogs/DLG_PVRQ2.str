@@ -1,0 +1,9 @@
+// C4D-DialogResource
+
+DIALOGSTRINGS DLG_PVRQ2
+{
+  IDS_DIALOG   "PV Render Queue 2";
+  IDS_STATIC   "";
+  IDS_STATIC1  "Top Group";
+  IDS_STATIC3  "";
+}

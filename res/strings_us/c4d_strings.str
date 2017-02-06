@@ -1,0 +1,26 @@
+STRINGTABLE
+{
+  IDS_ERROR_FILENOTLOADED "File '#' could not be loaded.";
+  IDS_ERROR_JOBRETURNEDNONE "Job did not provide scene information.";
+  IDS_ERROR_NOTC4DFILE "Not a Cinema 4D scene file.";
+  IDS_RMB_CANCEL "Cancel";
+  IDS_RMB_JOBDETAILS "Job Details...";
+  IDS_RMB_RESET "Reset";
+  IDS_COL_ENABLED "On";
+  IDS_COL_RENDERTR "TR";
+  IDS_COL_JOBNAME "Job Name";
+  IDS_COL_STATUS "Status";
+  IDS_STATUS_PENDING "Pending";
+  IDS_STATUS_RENDERING "Rendering";
+  IDS_STATUS_COMPLETED "Completed";
+  IDS_STATUS_FAILED "Failed";
+  IDS_STATUS_CANCELLED "Cancelled";
+  IDS_MENU_SCRIPTS "Scripts";
+  IDS_MENU_HELP "Help";
+  IDS_MENU_HELP_VISITDEV "Visit niklasrosenstein.com...";
+  IDS_MENU_HELP_DOCS "Help...";
+  IDS_MENU_HELP_APIDOCS "API Documentation...";
+  IDS_MENU_HELP_PLUGINPAGE "PV RenderQueue Website...";
+  IDS_SAVEERRORS "There were errors saving the render queue persistently. # #";
+  IDS_ASKCLOSE "Are you sure you want to close the window?";
+}

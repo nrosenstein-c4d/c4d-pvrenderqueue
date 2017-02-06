@@ -1,0 +1,3 @@
+[submodule "docs/c4d-fake"]
+	path = docs/c4d-fake
+	url = https://github.com/NiklasRosenstein/c4d-fake
