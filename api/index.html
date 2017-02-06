@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+
+	<title>PV Render Queue - PV Render Queue</title>
+
+        <link href="../css/bootstrap-3.0.3.min.css" rel="stylesheet">
+        <link href="../css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link rel="stylesheet" href="../css/highlight.css">
+        <link href="../css/base.css" rel="stylesheet">
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+        
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <!-- Main title -->
+            <a class="navbar-brand" href="..">PV Render Queue</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            <!-- Main navigation -->
+            <ul class="nav navbar-nav">
+            
+            
+                <li >
+                    <a href="..">Home</a>
+                </li>
+            
+            
+            
+                <li >
+                    <a href="../changelog/">Changelog</a>
+                </li>
+            
+            
+            
+                <li class="dropdown active">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">API <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    
+                        <li class="active">
+                            <a href="./">PV Render Queue</a>
+                        </li>
+                    
+                        <li >
+                            <a href="utils/">Utils</a>
+                        </li>
+                    
+                    </ul>
+                </li>
+            
+            
+            </ul>
+
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                <li >
+                    <a rel="next" href="../changelog/">
+                        <i class="fa fa-arrow-left"></i> Previous
+                    </a>
+                </li>
+                <li >
+                    <a rel="prev" href="utils/">
+                        Next <i class="fa fa-arrow-right"></i>
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+            <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+    </ul>
+</div></div>
+            <div class="col-md-9" role="main">
+
+<h1 id="nr.pvrq2">nr.pvrq2</h1>
+
+<p>This document describes the <code>nr.pvrq2</code> module. It exposes a rich API to develop
+extensions that is used internally by the <em>PV Render Queue 2</em> plugin as well.</p>
+<p><strong>Example</strong></p>
+<p>This is a stripped down version of the <code>queue_current_project.py</code> script
+that is delivered with the plugin. It simply takes the full path to the
+document and creates a new :class:<code>FileRenderJob</code> from it, appending as the
+last job in the render queue.</p>
+<pre><code class="python">import c4d, os
+import nr.pvrq2
+
+def main():
+  filename = os.path.join(doc.GetDocumentPath(), doc.GetDocumentName())
+  job = nr.pvrq2.FileRenderJob(filename)
+  nr.pvrq2.root.append(job)
+  c4d.EventAdd()
+
+main()
+</code></pre>
+
+<h2 id="nr.pvrq2.Folder">Folder</h2>
+
+<pre><code class="python">Folder(name='???')
+</code></pre>
+
+<p>Represents a folder that can contain a number of render jobs. All
+children of a folder are supposed to be :class:<code>RenderJob</code> objects.</p>
+<pre><code class="python">folder = nr.pvrq2.Folder('John Doe's stuff')
+folder.append(job1)
+folder.append(job2)
+nr.pvrq2.root.append(folder)
+</code></pre>
+
+<h2 id="nr.pvrq2.root">root</h2>
+
+<p>Represents the root of the render queue. Contains folders and jobs.</p>
+<h2 id="nr.pvrq2.status_str">status_str</h2>
+
+<pre><code class="python">status_str(status)
+</code></pre>
+
+<p>Converts a render job status to a localized string.</p>
+<h2 id="nr.pvrq2.cancel_rendering">cancel_rendering</h2>
+
+<pre><code class="python">cancel_rendering()
+</code></pre>
+
+<p>Cancels the external rendering. The user will have to reply wether
+the rendering should really be cancelled or not. Returns True if
+the active external rendering was cancelled, False if not.</p>
+<h2 id="nr.pvrq2.register_node_plugin">register_node_plugin</h2>
+
+<pre><code class="python">register_node_plugin(cls)
+</code></pre>
+
+<p>Registers a BaseNode subclass to PV Render Queue, allowing instances
+of that implementation to be serialized when they're in the render
+queue.</p>
+<p>:param cls: A :class:<code>BaseNode</code> subclass.
+:raise ValueError: If <em>cls.ident</em> is already used.
+:raise TypeError: If <em>cls</em> is not a :class:<code>BaseNode</code> subclass.</p>
+<h2 id="nr.pvrq2.FileRenderJob">FileRenderJob</h2>
+
+<pre><code class="python">FileRenderJob(filename='')
+</code></pre>
+
+<p>This class implements a render job from a scene file.</p>
+<h2 id="nr.pvrq2.get_cache_filename">get_cache_filename</h2>
+
+<pre><code class="python">get_cache_filename()
+</code></pre>
+
+<p>Returns the filename at which the cache of the queue is saved.</p>
+<h2 id="nr.pvrq2.write_nodes">write_nodes</h2>
+
+<pre><code class="python">write_nodes(root, hf)
+</code></pre>
+
+<p>Writes all nodes of <em>root</em> into the HyperFile <em>hf</em>.</p>
+<p>Note that this function can raise any exception that any
+of the <code>BaseNode.write()</code> implementations could raise.</p>
+<h2 id="nr.pvrq2.BaseNode">BaseNode</h2>
+
+<pre><code class="python">BaseNode()
+</code></pre>
+
+<p>Base class for nodes in the render queue. Provides properties such as an
+elements enabled and selection state. Instances of this class can be
+serialized to and from <code>c4d.HyperFile</code> objects but their constructor <strong>must</strong>
+be callable with no arguments for that to work.</p>
+<p><strong>Attributes</strong></p>
+<ul>
+<li>
+<p><code>enabled (bool)</code>: A <code>bool</code> flag that is used to determine if the node is
+  enabled. In the case of a <code>RenderJob</code>, this member determines if the job
+  should be rendered or skipped.</p>
+</li>
+<li>
+<p><code>selected (bool)</code>: A <code>bool</code> flag that specifies whether the node is selected
+  in the GUI or not. This member is not saved during serialization.</p>
+</li>
+<li>
+<p><code>uuid (uuid.UUID)</code>: The UUID of the node. This is used to keep track of
+  parent-child relationships during the serialization process with <code>read()</code>
+  and <code>write()</code>.</p>
+</li>
+</ul>
+<p><strong>Class Members</strong></p>
+<p>disklevel (int): Override on class-level. The disklevel for serialization.</p>
+<p>ident (str): Override on class-level. The identifier for finding the right
+  class to read back the node when loading a HyperFile.</p>
+<p>serializable (bool): Override on class-level. True if the implementation is
+  serializable, <code>False</code> if <code>read()</code> and <code>write()</code> raise <code>NotImplementedError</code>.</p>
+<h2 id="nr.pvrq2.move_node">move_node</h2>
+
+<pre><code class="python">move_node(node, direction)
+</code></pre>
+
+<p>Move the specified <em>node</em> up or down.</p>
+<p>:param node: The node to move.
+:param direction: The direction to move the node to.
+:returns: True if the node was moved, False if not.</p>
+<h2 id="nr.pvrq2.read_nodes">read_nodes</h2>
+
+<pre><code class="python">read_nodes(hf, error_callback=None)
+</code></pre>
+
+<p>Reads all nodes back from the HyperFile <em>hf</em> and returns all
+root nodes in a list.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>hf (c4d.storage.HyperFile)</strong>: The HyperFile to read from.</li>
+<li><strong>error_callback (function)</strong>: Called when an error occurs with an</li>
+<li>
+<p><strong>error type string and a data value. Possible type strings are</strong>:</p>
+</li>
+<li>
+<p><code>'unknown-plugin'</code> with the identifier as its data</p>
+</li>
+<li><code>'read-exception'</code> with the Python exception as its data</li>
+<li><code>'read-wrong-result'</code> with the wrong object returned</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p><code>list</code> of <code>BaseNode</code>.</p>
+<h2 id="nr.pvrq2.move_selected">move_selected</h2>
+
+<pre><code class="python">move_selected(direction)
+</code></pre>
+
+<p>Move the selected nodes up or down.</p>
+<p>:param direction: <code>'up'</code> or <code>'down'</code></p>
+<h2 id="nr.pvrq2.is_rendering">is_rendering</h2>
+
+<pre><code class="python">is_rendering(node=None)
+</code></pre>
+
+<p>:returns: True if any of the nodes in the tree starting at <em>node</em>
+  is currently rendering, False if not.</p>
+<h2 id="nr.pvrq2.delete_node">delete_node</h2>
+
+<pre><code class="python">delete_node(node)
+</code></pre>
+
+<p>Deletes a node from the render queue. If a render job is encountered
+that is currently rendering, and the user says not to stop the current
+rendering, nothing will happen.</p>
+<p>:returns: True if the node has been deleted, False if not.</p>
+<h2 id="nr.pvrq2.RenderJob">RenderJob</h2>
+
+<pre><code class="python">RenderJob()
+</code></pre>
+
+<p>Represents a job that is to be rendered in the Picture Viewer. It is,
+however, an abstract base class that can be subclassed to implement
+custom behaviour of the job (eg. pre-processing before rendering,
+notifications, whatever).</p>
+<p>A RenderJob is not expected to have child nodes.</p>
+<p>Known subclasses: <code>FileRenderJob</code></p>
+<p><strong>Attributes</strong></p>
+<ul>
+<li>
+<p><code>render_tr (bool)</code>: A <code>bool</code> flag that specifies whether the job should be
+  rendered with Team Render or using the standard Render to Picture Viewer
+  command.</p>
+</li>
+<li>
+<p><code>status (str): The status of the job. Any of the following values</code>:</p>
+<ul>
+<li><code>nr.pvrq2.STATUS_PENDING</code></li>
+<li><code>nr.pvrq2.STATUS_RENDERING</code></li>
+<li><code>nr.pvrq2.STATUS_COMPLETED</code></li>
+<li><code>nr.pvrq2.STATUS_FAILED</code></li>
+<li><code>nr.pvrq2.STATUS_CANCELLED</code></li>
+</ul>
+</li>
+<li>
+<p><code>error_message (str)</code>: <code>None</code> or a <code>str</code> if there was an error with the job.</p>
+</li>
+</ul>
+<p><strong>Class Members</strong></p>
+<p>resettable (bool): Class-level attribute that specifies if the job is
+  resettable using <code>reset()</code>.</p>
+<h2 id="nr.pvrq2.Root">Root</h2>
+
+<pre><code class="python">Root()
+</code></pre>
+
+<p>Represents the root of the render queue. Contains folders and jobs.</p></div>
+        </div>
+
+	<footer class="col-md-12">
+		<hr>
+		
+		<p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p>
+	</footer>
+
+
+        <script src="../js/jquery-1.10.2.min.js"></script>
+        <script src="../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../js/highlight.pack.js"></script>
+        <script src="../js/base.js"></script>
+    </body>
+</html>

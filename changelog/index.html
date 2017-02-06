@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+
+	<title>Changelog - PV Render Queue</title>
+
+        <link href="../css/bootstrap-3.0.3.min.css" rel="stylesheet">
+        <link href="../css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link rel="stylesheet" href="../css/highlight.css">
+        <link href="../css/base.css" rel="stylesheet">
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+        
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <!-- Main title -->
+            <a class="navbar-brand" href="..">PV Render Queue</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            <!-- Main navigation -->
+            <ul class="nav navbar-nav">
+            
+            
+                <li >
+                    <a href="..">Home</a>
+                </li>
+            
+            
+            
+                <li class="active">
+                    <a href="./">Changelog</a>
+                </li>
+            
+            
+            
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">API <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    
+                        <li >
+                            <a href="../api/">PV Render Queue</a>
+                        </li>
+                    
+                        <li >
+                            <a href="../api/utils/">Utils</a>
+                        </li>
+                    
+                    </ul>
+                </li>
+            
+            
+            </ul>
+
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                <li >
+                    <a rel="next" href="..">
+                        <i class="fa fa-arrow-left"></i> Previous
+                    </a>
+                </li>
+                <li >
+                    <a rel="prev" href="../api/">
+                        Next <i class="fa fa-arrow-right"></i>
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+            <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#changelog">Changelog</a></li>
+        
+            <li><a href="#v23">v2.3</a></li>
+        
+            <li><a href="#v22">v2.2</a></li>
+        
+            <li><a href="#v21">v2.1</a></li>
+        
+            <li><a href="#v20">v2.0</a></li>
+        
+    
+    </ul>
+</div></div>
+            <div class="col-md-9" role="main">
+
+<h1 id="changelog">Changelog</h1>
+<h2 id="v23">v2.3</h2>
+<ul>
+<li>Fix issue with pre-R17 versions of Cinema 4D embedding Python 2.6
+  which does not have <code>collections.OrderedDict</code> by adding
+  <code>nr.pvrq2.ordereddict.OrderedDict</code></li>
+</ul>
+<h2 id="v22">v2.2</h2>
+<ul>
+<li>Add the current project to the queue with the new <code>queue_current_project.py</code> script</li>
+<li>Automatically save the render queue persistently when the plugin is closed
+  and load it when its opened</li>
+<li>
+<p>API Changes</p>
+</li>
+<li>
+<p>Add <code>BaseNode.uuid</code>, <code>.ident</code>, <code>.disklevel</code>, <code>.serializable</code>,
+    <code>.read()</code> and <code>.write()</code></p>
+</li>
+<li>Add <code>nr.pvrq2.register_node_plugin()</code></li>
+<li>Add <code>TreeNode.iter_children(recursive=False)</code> parameter</li>
+</ul>
+<h2 id="v21">v2.1</h2>
+<ul>
+<li>Added HTML documentation to the plugin and hosted online here</li>
+<li>Updated API documentation</li>
+<li>Updated Links in the plugin's "Help" menu and README</li>
+</ul>
+<h2 id="v20">v2.0</h2>
+<ul>
+<li>Initial 2.0 version with improved user interface, new functionality
+  and scripting API</li>
+</ul></div>
+        </div>
+
+	<footer class="col-md-12">
+		<hr>
+		
+		<p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p>
+	</footer>
+
+
+        <script src="../js/jquery-1.10.2.min.js"></script>
+        <script src="../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../js/highlight.pack.js"></script>
+        <script src="../js/base.js"></script>
+    </body>
+</html>

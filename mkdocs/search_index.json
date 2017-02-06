@@ -1,0 +1,99 @@
+{
+    "docs": [
+        {
+            "location": "/",
+            "text": "PV Render Queue\n\n\nPV Render Queue is a free Cinema 4D Plugin by \nNiklas Rosenstein\n that allows\nyou to queue render jobs and render them directly in the Picture Viewer using\nthe external or Team Render.\n\n\n\n\nWatch a Preview Video on Vimeo.com:\n\n\n\n  \nPV Render Queue 2\n from \nNiklas Rosenstein\n on \nVimeo\n.\n\n\nFeatures\n\n\n\n\nSupports \nall\n render engines\n\n\nView the render progress right in the Picture Viewer\n\n\nAdd single files or all from a folder\n\n\nJob Folders\n\n\nTeam Render support\n\n\nPython Scripting API\n\n\nRender Object-Buffers quickly and easily (see video 5:56)\n\n\nTakes Support (R17) (see video 4:08)\n\n\n\n\nDocumentation\n\n\nAdding a Job\n\n\nOn the top-right corner of the PV Render Queue 2 window, you can find a \n+\n\nand a \"folder\" button. With the \n+\n button, you can select a single Cinema 4D\nscene file. You can add all Cinema 4D scene files in one folder by using the\n\"folder\" button.\n\n\nStarting the Queue\n\n\nBy pressing the \"play\" button, the plugin will start new render jobs whenever\nthe Picture Viewer is not rendering. You can disable the render queue by\npressing the button again (which has turned into a \"pause\" icon). If a\nrendering is taking place while the queue is disabled, you will be asked\nwhether the current rendering should be cancelled. You may press \"No\" to let\nthe render continue but still disable the render queue.\n\n\nView Job Details\n\n\nYou can view details about a job by double-clicking or choosing the\n\"Job Details...\" entry from the right-click context menu. If an error occurred\nwhile processing the job, you will find an error message in this dialog.\n\n\n\n\nScripts\n\n\nThe PV RenderQueue plugin provides a Python Scripting API that allows you to\nwrite custom render jobs. Two useful scripts are included. You can add your\nown scripts by placing the into the plugins \nscripts/\n folder. You can also\njust run them from the Cinema 4D Script Manager!\n\n\nqueue_current_project\n\n\nAdded in v2.2\n This script adds the current project to the render queue.\n\n\ntakes\n\n\nRequires Cinema 4D R17+\n. With this script, you can create a render job for\neach take that you selected in the Takes Manager.\n\n\nobject_passes (Object Buffers)\n\n\nWith this script, you can create a render job for each object selected in the\nObjects Manager. The scene will be modified internally so that it renders\ncompletely black, except for the selected object. The script will also disable\nmany unnecessary options to speed up the rendering.\n\n\n\n\n\n\n!!!note \"Incompatibility\"\n    Due to a Cinema 4D bug introduced in R17.053 which is only fixed\n    in R18.039 and newer, the \n\"takes\"\n script does not function!",
+            "title": "Home"
+        },
+        {
+            "location": "/#pv-render-queue",
+            "text": "PV Render Queue is a free Cinema 4D Plugin by  Niklas Rosenstein  that allows\nyou to queue render jobs and render them directly in the Picture Viewer using\nthe external or Team Render.   Watch a Preview Video on Vimeo.com:  \n   PV Render Queue 2  from  Niklas Rosenstein  on  Vimeo .",
+            "title": "PV Render Queue"
+        },
+        {
+            "location": "/#features",
+            "text": "Supports  all  render engines  View the render progress right in the Picture Viewer  Add single files or all from a folder  Job Folders  Team Render support  Python Scripting API  Render Object-Buffers quickly and easily (see video 5:56)  Takes Support (R17) (see video 4:08)",
+            "title": "Features"
+        },
+        {
+            "location": "/#documentation",
+            "text": "",
+            "title": "Documentation"
+        },
+        {
+            "location": "/#adding-a-job",
+            "text": "On the top-right corner of the PV Render Queue 2 window, you can find a  + \nand a \"folder\" button. With the  +  button, you can select a single Cinema 4D\nscene file. You can add all Cinema 4D scene files in one folder by using the\n\"folder\" button.",
+            "title": "Adding a Job"
+        },
+        {
+            "location": "/#starting-the-queue",
+            "text": "By pressing the \"play\" button, the plugin will start new render jobs whenever\nthe Picture Viewer is not rendering. You can disable the render queue by\npressing the button again (which has turned into a \"pause\" icon). If a\nrendering is taking place while the queue is disabled, you will be asked\nwhether the current rendering should be cancelled. You may press \"No\" to let\nthe render continue but still disable the render queue.",
+            "title": "Starting the Queue"
+        },
+        {
+            "location": "/#view-job-details",
+            "text": "You can view details about a job by double-clicking or choosing the\n\"Job Details...\" entry from the right-click context menu. If an error occurred\nwhile processing the job, you will find an error message in this dialog.",
+            "title": "View Job Details"
+        },
+        {
+            "location": "/#scripts",
+            "text": "The PV RenderQueue plugin provides a Python Scripting API that allows you to\nwrite custom render jobs. Two useful scripts are included. You can add your\nown scripts by placing the into the plugins  scripts/  folder. You can also\njust run them from the Cinema 4D Script Manager!",
+            "title": "Scripts"
+        },
+        {
+            "location": "/#queue_current_project",
+            "text": "Added in v2.2  This script adds the current project to the render queue.",
+            "title": "queue_current_project"
+        },
+        {
+            "location": "/#takes",
+            "text": "Requires Cinema 4D R17+ . With this script, you can create a render job for\neach take that you selected in the Takes Manager.",
+            "title": "takes"
+        },
+        {
+            "location": "/#object_passes-object-buffers",
+            "text": "With this script, you can create a render job for each object selected in the\nObjects Manager. The scene will be modified internally so that it renders\ncompletely black, except for the selected object. The script will also disable\nmany unnecessary options to speed up the rendering.    !!!note \"Incompatibility\"\n    Due to a Cinema 4D bug introduced in R17.053 which is only fixed\n    in R18.039 and newer, the  \"takes\"  script does not function!",
+            "title": "object_passes (Object Buffers)"
+        },
+        {
+            "location": "/changelog/",
+            "text": "Changelog\n\n\nv2.3\n\n\n\n\nFix issue with pre-R17 versions of Cinema 4D embedding Python 2.6\n  which does not have \ncollections.OrderedDict\n by adding\n  \nnr.pvrq2.ordereddict.OrderedDict\n\n\n\n\nv2.2\n\n\n\n\nAdd the current project to the queue with the new \nqueue_current_project.py\n script\n\n\nAutomatically save the render queue persistently when the plugin is closed\n  and load it when its opened\n\n\n\n\nAPI Changes\n\n\n\n\n\n\nAdd \nBaseNode.uuid\n, \n.ident\n, \n.disklevel\n, \n.serializable\n,\n    \n.read()\n and \n.write()\n\n\n\n\nAdd \nnr.pvrq2.register_node_plugin()\n\n\nAdd \nTreeNode.iter_children(recursive=False)\n parameter\n\n\n\n\nv2.1\n\n\n\n\nAdded HTML documentation to the plugin and hosted online here\n\n\nUpdated API documentation\n\n\nUpdated Links in the plugin's \"Help\" menu and README\n\n\n\n\nv2.0\n\n\n\n\nInitial 2.0 version with improved user interface, new functionality\n  and scripting API",
+            "title": "Changelog"
+        },
+        {
+            "location": "/changelog/#changelog",
+            "text": "",
+            "title": "Changelog"
+        },
+        {
+            "location": "/changelog/#v23",
+            "text": "Fix issue with pre-R17 versions of Cinema 4D embedding Python 2.6\n  which does not have  collections.OrderedDict  by adding\n   nr.pvrq2.ordereddict.OrderedDict",
+            "title": "v2.3"
+        },
+        {
+            "location": "/changelog/#v22",
+            "text": "Add the current project to the queue with the new  queue_current_project.py  script  Automatically save the render queue persistently when the plugin is closed\n  and load it when its opened   API Changes    Add  BaseNode.uuid ,  .ident ,  .disklevel ,  .serializable ,\n     .read()  and  .write()   Add  nr.pvrq2.register_node_plugin()  Add  TreeNode.iter_children(recursive=False)  parameter",
+            "title": "v2.2"
+        },
+        {
+            "location": "/changelog/#v21",
+            "text": "Added HTML documentation to the plugin and hosted online here  Updated API documentation  Updated Links in the plugin's \"Help\" menu and README",
+            "title": "v2.1"
+        },
+        {
+            "location": "/changelog/#v20",
+            "text": "Initial 2.0 version with improved user interface, new functionality\n  and scripting API",
+            "title": "v2.0"
+        },
+        {
+            "location": "/api/",
+            "text": "nr.pvrq2\n\n\n\nThis document describes the \nnr.pvrq2\n module. It exposes a rich API to develop\nextensions that is used internally by the \nPV Render Queue 2\n plugin as well.\n\n\nExample\n\n\nThis is a stripped down version of the \nqueue_current_project.py\n script\nthat is delivered with the plugin. It simply takes the full path to the\ndocument and creates a new :class:\nFileRenderJob\n from it, appending as the\nlast job in the render queue.\n\n\nimport c4d, os\nimport nr.pvrq2\n\ndef main():\n  filename = os.path.join(doc.GetDocumentPath(), doc.GetDocumentName())\n  job = nr.pvrq2.FileRenderJob(filename)\n  nr.pvrq2.root.append(job)\n  c4d.EventAdd()\n\nmain()\n\n\n\n\nFolder\n\n\n\nFolder(name='???')\n\n\n\n\nRepresents a folder that can contain a number of render jobs. All\nchildren of a folder are supposed to be :class:\nRenderJob\n objects.\n\n\nfolder = nr.pvrq2.Folder('John Doe's stuff')\nfolder.append(job1)\nfolder.append(job2)\nnr.pvrq2.root.append(folder)\n\n\n\n\nroot\n\n\n\nRepresents the root of the render queue. Contains folders and jobs.\n\n\nstatus_str\n\n\n\nstatus_str(status)\n\n\n\n\nConverts a render job status to a localized string.\n\n\ncancel_rendering\n\n\n\ncancel_rendering()\n\n\n\n\nCancels the external rendering. The user will have to reply wether\nthe rendering should really be cancelled or not. Returns True if\nthe active external rendering was cancelled, False if not.\n\n\nregister_node_plugin\n\n\n\nregister_node_plugin(cls)\n\n\n\n\nRegisters a BaseNode subclass to PV Render Queue, allowing instances\nof that implementation to be serialized when they're in the render\nqueue.\n\n\n:param cls: A :class:\nBaseNode\n subclass.\n:raise ValueError: If \ncls.ident\n is already used.\n:raise TypeError: If \ncls\n is not a :class:\nBaseNode\n subclass.\n\n\nFileRenderJob\n\n\n\nFileRenderJob(filename='')\n\n\n\n\nThis class implements a render job from a scene file.\n\n\nget_cache_filename\n\n\n\nget_cache_filename()\n\n\n\n\nReturns the filename at which the cache of the queue is saved.\n\n\nwrite_nodes\n\n\n\nwrite_nodes(root, hf)\n\n\n\n\nWrites all nodes of \nroot\n into the HyperFile \nhf\n.\n\n\nNote that this function can raise any exception that any\nof the \nBaseNode.write()\n implementations could raise.\n\n\nBaseNode\n\n\n\nBaseNode()\n\n\n\n\nBase class for nodes in the render queue. Provides properties such as an\nelements enabled and selection state. Instances of this class can be\nserialized to and from \nc4d.HyperFile\n objects but their constructor \nmust\n\nbe callable with no arguments for that to work.\n\n\nAttributes\n\n\n\n\n\n\nenabled (bool)\n: A \nbool\n flag that is used to determine if the node is\n  enabled. In the case of a \nRenderJob\n, this member determines if the job\n  should be rendered or skipped.\n\n\n\n\n\n\nselected (bool)\n: A \nbool\n flag that specifies whether the node is selected\n  in the GUI or not. This member is not saved during serialization.\n\n\n\n\n\n\nuuid (uuid.UUID)\n: The UUID of the node. This is used to keep track of\n  parent-child relationships during the serialization process with \nread()\n\n  and \nwrite()\n.\n\n\n\n\n\n\nClass Members\n\n\ndisklevel (int): Override on class-level. The disklevel for serialization.\n\n\nident (str): Override on class-level. The identifier for finding the right\n  class to read back the node when loading a HyperFile.\n\n\nserializable (bool): Override on class-level. True if the implementation is\n  serializable, \nFalse\n if \nread()\n and \nwrite()\n raise \nNotImplementedError\n.\n\n\nmove_node\n\n\n\nmove_node(node, direction)\n\n\n\n\nMove the specified \nnode\n up or down.\n\n\n:param node: The node to move.\n:param direction: The direction to move the node to.\n:returns: True if the node was moved, False if not.\n\n\nread_nodes\n\n\n\nread_nodes(hf, error_callback=None)\n\n\n\n\nReads all nodes back from the HyperFile \nhf\n and returns all\nroot nodes in a list.\n\n\nParameters\n\n\n\n\nhf (c4d.storage.HyperFile)\n: The HyperFile to read from.\n\n\nerror_callback (function)\n: Called when an error occurs with an\n\n\n\n\nerror type string and a data value. Possible type strings are\n:\n\n\n\n\n\n\n'unknown-plugin'\n with the identifier as its data\n\n\n\n\n'read-exception'\n with the Python exception as its data\n\n\n'read-wrong-result'\n with the wrong object returned\n\n\n\n\nReturns\n\n\nlist\n of \nBaseNode\n.\n\n\nmove_selected\n\n\n\nmove_selected(direction)\n\n\n\n\nMove the selected nodes up or down.\n\n\n:param direction: \n'up'\n or \n'down'\n\n\nis_rendering\n\n\n\nis_rendering(node=None)\n\n\n\n\n:returns: True if any of the nodes in the tree starting at \nnode\n\n  is currently rendering, False if not.\n\n\ndelete_node\n\n\n\ndelete_node(node)\n\n\n\n\nDeletes a node from the render queue. If a render job is encountered\nthat is currently rendering, and the user says not to stop the current\nrendering, nothing will happen.\n\n\n:returns: True if the node has been deleted, False if not.\n\n\nRenderJob\n\n\n\nRenderJob()\n\n\n\n\nRepresents a job that is to be rendered in the Picture Viewer. It is,\nhowever, an abstract base class that can be subclassed to implement\ncustom behaviour of the job (eg. pre-processing before rendering,\nnotifications, whatever).\n\n\nA RenderJob is not expected to have child nodes.\n\n\nKnown subclasses: \nFileRenderJob\n\n\nAttributes\n\n\n\n\n\n\nrender_tr (bool)\n: A \nbool\n flag that specifies whether the job should be\n  rendered with Team Render or using the standard Render to Picture Viewer\n  command.\n\n\n\n\n\n\nstatus (str): The status of the job. Any of the following values\n:\n\n\n\n\nnr.pvrq2.STATUS_PENDING\n\n\nnr.pvrq2.STATUS_RENDERING\n\n\nnr.pvrq2.STATUS_COMPLETED\n\n\nnr.pvrq2.STATUS_FAILED\n\n\nnr.pvrq2.STATUS_CANCELLED\n\n\n\n\n\n\n\n\nerror_message (str)\n: \nNone\n or a \nstr\n if there was an error with the job.\n\n\n\n\n\n\nClass Members\n\n\nresettable (bool): Class-level attribute that specifies if the job is\n  resettable using \nreset()\n.\n\n\nRoot\n\n\n\nRoot()\n\n\n\n\nRepresents the root of the render queue. Contains folders and jobs.",
+            "title": "PV Render Queue"
+        },
+        {
+            "location": "/api/utils/",
+            "text": "nr.pvrq2.gui\n\n\n\nJobDetailsDialog\n\n\n\nJobDetailsDialog(title, data)\n\n\n\n\nThis dialog takes a dictionary as input and displays all key value\npairs in a two-column table.\n\n\nnr.pvrq2.node\n\n\n\nTreeNodeBase\n\n\n\nTreeNodeBase()\n\n\n\n\nA base class to construct tree structures.\n\n\n.. attribute:: root\n\n\n:getter: Returns the root of the tree.\n  :type: :class:\nTreeNodeBase\n\n\n.. attribute:: parent\n\n\n:getter: Returns the parent node of this node.\n  :type: :class:\nTreeNodeBase\n\n\n.. attribute:: next\n\n\n:getter: Returns the next node of this node.\n  :type: :class:\nTreeNodeBase\n\n\n.. attribute:: pred\n\n\n:getter: Returns the preceding node of this node.\n  :type: :class:\nTreeNodeBase\n\n\n.. attribute:: down\n\n\n:getter: Returns the first child node of this node.\n  :type: :class:\nTreeNodeBase\n\n\n.. attribute:: down_last\n\n\n:getter: Returns the last child node of this node.\n  :type: :class:\nTreeNodeBase\n\n\n.. attribute:: children\n\n\n:getter: Returns a list of the node's children.\n  :type: :class:\nlist\n of :class:\nTreeNodeBase\n\n\nnr.pvrq2.ordereddict\n\n\n\nOrderedDict\n\n\n\nOrderedDict(iterable=())\n\n\n\n\nA very basic implementation of an ordered dictionary.",
+            "title": "Utils"
+        }
+    ]
+}
