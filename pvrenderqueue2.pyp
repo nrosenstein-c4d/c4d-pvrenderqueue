@@ -14,6 +14,9 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+from __future__ import print_function
+from importlib import reload
+
 DEBUG = True
 
 #######################################################################
@@ -204,7 +207,7 @@ def run_script(filename):
     '__name__': '__main__',
     '__file__': filename}
   try:
-    exec compile(code, filename, 'exec') in scope
+    exec(compile(code, filename, 'exec'), scope)
   except BaseException:
     traceback.print_exc()
 
@@ -464,7 +467,7 @@ class RQDialog(c4d.gui.GeDialog):
       return False
 
     def error_callback(kind, data):
-      print '[PV Render Queue 2]: LoadCache:', kind, data
+      print('[PV Render Queue 2]: LoadCache:', kind, data)
 
     try:
       nodes = pvrq2.read_nodes(hf, error_callback)
@@ -539,7 +542,7 @@ class RQDialog(c4d.gui.GeDialog):
       try:
         filename = self.scripts[index]
       except IndexError:
-        print "[PV Render Queue 2]: Script index out of range.", index
+        print("[PV Render Queue 2]: Script index out of range.", index)
       else:
         run_script(filename)
         self.SaveCache()
@@ -642,7 +645,7 @@ class RQMessageData(c4d.plugins.MessageData):
           except BaseException:
             node.status = pvrq2.STATUS_FAILED
             node.error_message = traceback.format_exc()
-            print >> sys.stderr, node.error_message
+            print(node.error_message, file=sys.stderr)
           else:
             if next_up is None:
               node.status = pvrq2.STATUS_FAILED
